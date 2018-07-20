@@ -1,4 +1,5 @@
 import { prop, uniq, pipe, map, reverse } from 'ramda'
+import { readFileSync, writeFileSync } from 'fs'
 
 export const getNames = pipe(
   reverse,
@@ -8,5 +9,16 @@ export const getNames = pipe(
 )
 
 export function meet (name, date) {
-  return {name, date}
+  return {
+    name,
+    date: date.toISOString()
+  }
+}
+
+export function save (filename, data) {
+  writeFileSync(filename, JSON.stringify(data))
+}
+
+export function load (filename) {
+  return JSON.parse(readFileSync(filename))
 }

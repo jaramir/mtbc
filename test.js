@@ -1,6 +1,6 @@
 import test from 'tape'
 
-import { getNames, meet } from './index'
+import { getNames, meet, save, load } from './index'
 
 test('initually we have not met anyone', t => {
   t.deepEqual(getNames([]), [])
@@ -49,5 +49,22 @@ test('people you met longer ago are first', t => {
   ]
 
   t.deepEqual(getNames(history), [ 'Carl', 'Bob', 'Alice' ])
+  t.end()
+})
+
+test('save and load history to file', t => {
+  const saved = [
+    meet('Alice', new Date()),
+    meet('Bob', new Date()),
+    meet('Carl', new Date()),
+    meet('Bob', new Date()),
+    meet('Alice', new Date())
+  ]
+
+  save('history.test', saved)
+
+  const loaded = load('history.test')
+
+  t.deepEqual(loaded, saved)
   t.end()
 })
