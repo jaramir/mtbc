@@ -1,5 +1,6 @@
-const { prop, uniq, pipe, map, reverse } = require('ramda')
+const { prop, uniq, pipe, map, reverse, find, propEq } = require('ramda')
 const { readFileSync, writeFileSync } = require('fs')
+const { distanceInWordsToNow } = require('date-fns')
 
 const getNames = pipe(
   reverse,
@@ -31,9 +32,22 @@ function load (filename) {
   }
 }
 
+function lastConversation (history, name) {
+  return pipe(
+    reverse,
+    find(propEq('name', name)),
+    prop('date')
+  )(history)
+}
+
+function whenHaveWeMet (history, name) {
+  return distanceInWordsToNow(lastConversation(history, name)) + ' ago'
+}
+
 module.exports = {
   getNames,
   meet,
   save,
-  load
+  load,
+  whenHaveWeMet
 }

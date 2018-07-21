@@ -12,7 +12,9 @@ const history = mtbc.load(filename)
 
 if (argv.length === 0) {
   const names = mtbc.getNames(history)
-  names.forEach(name => console.log(name))
+  names.forEach(name => {
+    console.log(name, '\t', mtbc.whenHaveWeMet(history, name))
+  })
 } else if (argv.length === 1) {
   const name = argv[0]
   const conversation = mtbc.meet(name, new Date())

@@ -1,6 +1,7 @@
 const test = require('tape')
 const { unlinkSync } = require('fs')
-const { getNames, meet, save, load } = require('./mtbc')
+const { getNames, meet, save, load, whenHaveWeMet } = require('./mtbc')
+const { subDays, subHours } = require('date-fns')
 
 test('initially we have not met anyone', t => {
   t.deepEqual(getNames([]), [])
@@ -55,5 +56,20 @@ test('empty history if file is missing', t => {
   const filename = 'history.test'
 
   t.deepEqual(load(filename), [])
+  t.end()
+})
+
+test('tells how long since we last met someone', t => {
+  const history = [
+    meet('Alice', subDays(new Date(), 365)),
+    meet('Bob', subDays(new Date(), 36)),
+    meet('Alice', subDays(new Date(), 3)),
+    meet('Bob', subHours(new Date(), 12)),
+    meet('Carl', new Date())
+  ]
+
+  t.equal(whenHaveWeMet(history, 'Alice'), '3 days ago')
+  t.equal(whenHaveWeMet(history, 'Bob'), 'about 12 hours ago')
+  t.equal(whenHaveWeMet(history, 'Carl'), 'less than a minute ago')
   t.end()
 })
