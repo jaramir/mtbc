@@ -4,6 +4,7 @@ const path = require('path')
 const os = require('os')
 const ramda = require('ramda')
 const mtbc = require('./mtbc')
+require('colors')
 
 const argv = process.argv.slice(2)
 
@@ -13,7 +14,7 @@ const history = mtbc.load(filename)
 if (argv.length === 0) {
   const names = mtbc.getNames(history)
   names.forEach(name => {
-    console.log(name, '\t', mtbc.whenHaveWeMet(history, name))
+    console.log(name.bold, '\t', mtbc.whenHaveWeMet(history, name))
   })
 } else if (argv.length === 1) {
   const name = argv[0]
