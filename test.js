@@ -1,33 +1,13 @@
-import test from 'tape'
+const test = require('tape')
+const { unlinkSync } = require('fs')
+const { getNames, meet, save, load } = require('./mtbc')
 
-import { getNames, meet, save, load } from './index'
-
-test('initually we have not met anyone', t => {
+test('initially we have not met anyone', t => {
   t.deepEqual(getNames([]), [])
-
   t.end()
 })
 
-test('once we meet someone', t => {
-  const history = [
-    meet('Alice Cooper', new Date())
-  ]
-
-  t.deepEqual(getNames(history), ['Alice Cooper'])
-  t.end()
-})
-
-test('we have met multiple people', t => {
-  const history = [
-    meet('Alice', new Date()),
-    meet('Bob', new Date())
-  ]
-
-  t.deepEqual(getNames(history), [ 'Alice', 'Bob' ])
-  t.end()
-})
-
-test('find each person once', t => {
+test('find each person we met once', t => {
   const history = [
     meet('Alice', new Date()),
     meet('Bob', new Date()),
@@ -53,6 +33,7 @@ test('people you met longer ago are first', t => {
 })
 
 test('save and load history to file', t => {
+  const filename = 'history.test'
   const saved = [
     meet('Alice', new Date()),
     meet('Bob', new Date()),
@@ -61,10 +42,18 @@ test('save and load history to file', t => {
     meet('Alice', new Date())
   ]
 
-  save('history.test', saved)
-
-  const loaded = load('history.test')
+  save(filename, saved)
+  const loaded = load(filename)
 
   t.deepEqual(loaded, saved)
+
+  unlinkSync(filename)
+  t.end()
+})
+
+test('empty history if file is missing', t => {
+  const filename = 'history.test'
+
+  t.deepEqual(load(filename), [])
   t.end()
 })

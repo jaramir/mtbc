@@ -2,21 +2,21 @@
   "name": "mtbc",
   "version": "1.0.0",
   "description": "Mean Time Between Conversations",
-  "main": "index.js",
+  "main": "mtbc.js",
   "repository": "git@github.com:jaramir/mtbc.git",
   "author": "Francesco Gigli <jaramir@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
     "tap-min": "^1.2.2",
     "tape": "^4.9.1"
   },
   "scripts": {
-    "test": "tape -r babel-register test.js | tap-min"
+    "test": "tape test.js | tap-min"
   },
   "dependencies": {
-    "date-fns": "^1.29.0",
     "ramda": "^0.25.0"
+  },
+  "bin": {
+    "mtbc": "cli.js"
   }
 }
