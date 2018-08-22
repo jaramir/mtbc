@@ -17,7 +17,7 @@ function meet (name, date) {
 }
 
 function save (filename, data) {
-  writeFileSync(filename, JSON.stringify(data))
+  writeFileSync(filename, JSON.stringify(data, null, 2))
 }
 
 function load (filename) {
