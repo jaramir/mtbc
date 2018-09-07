@@ -2,13 +2,13 @@
 
 const path = require('path')
 const os = require('os')
-const ramda = require('ramda')
 const mtbc = require('./mtbc')
+require('colors')
 
 const filename = path.join(os.homedir(), '.mtbc.json')
 const history = mtbc.load(filename)
-const names = mtbc.getNames(history)
 
-const name = argv[0]
-const conversation = mtbc.meet(name, new Date())
-mtbc.save(filename, ramda.append(conversation, history))
+const names = mtbc.getNames(history)
+names.forEach(name => {
+  console.log(name.bold, '\t', mtbc.whenHaveWeMet(history, name))
+})
