@@ -300,7 +300,7 @@ supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
-tap-min@^1.2.2:
+tap-min@1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/tap-min/-/tap-min-1.2.2.tgz#f9b066ac95d5f8254b9563ddb50411bef0da9553"
   dependencies:
@@ -319,7 +319,7 @@ tap-parser@^6.0.1:
     js-yaml "^3.2.7"
     minipass "^2.2.0"
 
-tape@^4.9.1:
+tape@4.9.1:
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/tape/-/tape-4.9.1.tgz#1173d7337e040c76fbf42ec86fcabedc9b3805c9"
   dependencies:
