@@ -1,5 +1,10 @@
 {
   "extends": [
     "config:base"
-  ]
+  ],
+  "travis": {
+    "enabled": true,
+    "supportPolicy": [ "current" ]
+  },
+  "rangeStrategy": "pin"
 }
