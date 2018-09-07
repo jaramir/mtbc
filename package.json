@@ -7,8 +7,8 @@
   "author": "Francesco Gigli <jaramir@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "tap-min": "^1.2.2",
-    "tape": "^4.9.1"
+    "tap-min": "1.2.2",
+    "tape": "4.9.1"
   },
   "scripts": {
     "test": "tape test.js | tap-min"
