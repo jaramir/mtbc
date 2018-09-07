@@ -4,11 +4,23 @@ const path = require('path')
 const os = require('os')
 const ramda = require('ramda')
 const mtbc = require('./mtbc')
+const inquirer = require('inquirer')
 
-const filename = path.join(os.homedir(), '.mtbc.json')
-const history = mtbc.load(filename)
-const names = mtbc.getNames(history)
+function recordConversation (who) {
+  const filename = path.join(os.homedir(), '.mtbc.json')
+  const history = mtbc.load(filename)
+  const conversation = mtbc.meet(who, new Date())
+  mtbc.save(filename, ramda.append(conversation, history))
+}
 
-const name = argv[0]
-const conversation = mtbc.meet(name, new Date())
-mtbc.save(filename, ramda.append(conversation, history))
+inquirer
+  .prompt({
+    type: 'input',
+    name: 'who',
+    message: 'Who have you had a conversation with?'
+  })
+  .then(answers => {
+    if (answers.who) {
+      recordConversation(answers.who)
+    }
+  })
