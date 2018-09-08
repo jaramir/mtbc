@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --no-warnings
 
 const path = require('path')
 const os = require('os')

@@ -36,7 +36,7 @@ function load (filename) {
 function asyncLoad (filename) {
   return readFile(filename)
     .then(JSON.parse)
-    .catch([])
+    .catch(() => [])
 }
 
 function lastConversation (history, name) {
