@@ -21,8 +21,6 @@ const source = (answersSoFar, input) =>
         .filter(input, names)
         .map(ramda.prop('string'))
 
-      if (matches.length === 0) return [input]
-
       return ramda.append(input, matches)
     })
 
