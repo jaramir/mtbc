@@ -1,5 +1,6 @@
 const { prop, uniq, pipe, map, reverse, find, propEq } = require('ramda')
 const { readFileSync, writeFileSync } = require('fs')
+const readFile = require('fs').promises.readFile
 const { distanceInWordsToNow } = require('date-fns')
 
 const getNames = pipe(
@@ -32,6 +33,12 @@ function load (filename) {
   }
 }
 
+function asyncLoad (filename) {
+  return readFile(filename)
+    .then(JSON.parse)
+    .catch(() => [])
+}
+
 function lastConversation (history, name) {
   return pipe(
     reverse,
@@ -49,5 +56,6 @@ module.exports = {
   meet,
   save,
   load,
+  asyncLoad,
   whenHaveWeMet
 }

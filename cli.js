@@ -1,27 +1,40 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --no-warnings
 
 const path = require('path')
 const os = require('os')
 const ramda = require('ramda')
 const mtbc = require('./mtbc')
-require('colors')
-
-const argv = process.argv.slice(2)
-
+const inquirer = require('inquirer')
+const autocompletePrompt = require('inquirer-autocomplete-prompt')
+const fuzzy = require('fuzzy')
 const filename = path.join(os.homedir(), '.mtbc.json')
-const history = mtbc.load(filename)
 
-if (argv.length === 0) {
-  const names = mtbc.getNames(history)
-  names.forEach(name => {
-    console.log(name.bold, '\t', mtbc.whenHaveWeMet(history, name))
+inquirer.registerPrompt('autocomplete', autocompletePrompt)
+
+const source = (answersSoFar, input) =>
+  mtbc.asyncLoad(filename)
+    .then(mtbc.getNames)
+    .then(names => {
+      if (!input) return names
+
+      const matches = fuzzy
+        .filter(input, names)
+        .map(ramda.prop('string'))
+
+      return ramda.append(input, matches)
+    })
+
+inquirer
+  .prompt({
+    type: 'autocomplete',
+    name: 'who',
+    message: 'Who have you had a conversation with?',
+    source
   })
-} else if (argv.length === 1) {
-  const name = argv[0]
-  const conversation = mtbc.meet(name, new Date())
-  mtbc.save(filename, ramda.append(conversation, history))
-} else {
-  console.log('usage:')
-  console.log('mtbc                        print report')
-  console.log('mtbc <name>                 record conversation')
-}
+  .then(answers => {
+    if (answers.who) {
+      const history = mtbc.load(filename)
+      const conversation = mtbc.meet(answers.who, new Date())
+      mtbc.save(filename, ramda.append(conversation, history))
+    }
+  })
