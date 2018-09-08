@@ -11,26 +11,20 @@ const filename = path.join(os.homedir(), '.mtbc.json')
 
 inquirer.registerPrompt('autocomplete', autocompletePrompt)
 
-const source = (answersSoFar, input) => new Promise(resolve => {
-  const history = mtbc.load(filename)
-  const names = mtbc.getNames(history)
+const source = (answersSoFar, input) =>
+  mtbc.asyncLoad(filename)
+    .then(mtbc.getNames)
+    .then(names => {
+      if (!input) return names
 
-  if (!input) {
-    resolve(names)
-    return
-  }
+      const matches = fuzzy
+        .filter(input, names)
+        .map(ramda.prop('string'))
 
-  const matches = fuzzy
-    .filter(input, names)
-    .map(ramda.prop('string'))
+      if (matches.length === 0) return [input]
 
-  if (matches.length === 0) {
-    resolve([input])
-    return
-  }
-
-  resolve(matches)
-})
+      return ramda.append(input, matches)
+    })
 
 inquirer
   .prompt({
