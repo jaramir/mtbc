@@ -68,13 +68,21 @@ call-bind@^1.0.0, call-bind@^1.0.2:
     function-bind "^1.1.1"
     get-intrinsic "^1.0.2"
 
-chalk@^2.0.0, chalk@^2.1.0:
+chalk@^2.0.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.1.tgz#18c49ab16a037b6eb0152cc83e3471338215b66e"
   dependencies:
     ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
+
+chalk@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-3.0.0.tgz#3f73c2bf526591f574cc492c51e2456349f844e4"
+  integrity sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
 
 chalk@^4.1.0:
   version "4.1.0"
@@ -358,9 +366,10 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-hirestime@^3.1.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/hirestime/-/hirestime-3.2.1.tgz#8355d263b81424dd7b91e99157ab0b333bf7ae3a"
+hirestime@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/hirestime/-/hirestime-7.0.3.tgz#90917d6d44ff90084cab7651276d7a4f1fdcb17a"
+  integrity sha512-XmjAwwjLJlDjVVljWht/+Pb6vTfs6A0z2ZpaCkVmzEkwiZcO/+lbj1DsxpsDvkVprYHCmNBxTr7tUohdlxG2Hw==
 
 iconv-lite@^0.4.24:
   version "0.4.24"
@@ -665,7 +674,7 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
 
-parse-ms@^2.0.0:
+parse-ms@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/parse-ms/-/parse-ms-2.1.0.tgz#348565a753d4391fa524029956b172cb7753097d"
   integrity sha512-kHt7kzLoS9VBZfUsiKjv43mr91ea+U05EyKkEtqp7vNbHxmaVuEqN7XxeEVnGrMtYOAxGrDElSi96K7EgO1zCA==
@@ -679,12 +688,12 @@ path-parse@^1.0.6:
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
 
-pretty-ms@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-4.0.0.tgz#31baf41b94fd02227098aaa03bd62608eb0d6e92"
-  integrity sha512-qG66ahoLCwpLXD09ZPHSCbUWYTqdosB7SMP4OffgTgL2PBKXMuUsrk5Bwg8q4qPkjTXsKBMr+YK3Ltd/6F9s/Q==
+pretty-ms@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-5.1.0.tgz#b906bdd1ec9e9799995c372e2b1c34f073f95384"
+  integrity sha512-4gaK1skD2gwscCfkswYQRmddUb2GJZtzDGRjHWadVHtK/DIKFufa12MvES6/xu1tVbUYeia5bmLcwJtZJQUqnw==
   dependencies:
-    parse-ms "^2.0.0"
+    parse-ms "^2.1.0"
 
 ramda@0.27.1:
   version "0.27.1"
@@ -852,15 +861,15 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-tap-min@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/tap-min/-/tap-min-2.0.0.tgz#86fbdabb1749c103a22eeb2f39b784cdf277a2b8"
-  integrity sha512-llKVnIeUOorc9YFmGcfN9kZypBZcz6QA9Pky+cMhXpD/fcU30q1pazSWo6yGBoS2ggeBAkb0BhKZo87xNdUTxQ==
+tap-min@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/tap-min/-/tap-min-2.0.1.tgz#9410f0a0c11d206649cb0797faa03beb65fefd7c"
+  integrity sha512-L4bcRoLt7fbiUgALEbu4nsCDoWhd08iVD/8HYdQPRA7XD3TUOq9TunDBMJOsqmdDheMjG+sreWNNPMlXgrjVfQ==
   dependencies:
-    chalk "^2.1.0"
+    chalk "^3.0.0"
     duplexer3 "^0.1.4"
-    hirestime "^3.1.1"
-    pretty-ms "^4.0.0"
+    hirestime "^7.0.3"
+    pretty-ms "^5.1.0"
     readable-stream "^3.0.6"
     tap-parser "^9.3.1"
 
